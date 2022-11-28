@@ -1,4 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  SearchBarHeader,
+  Form,
+  Button,
+  ButtonLabel,
+  Input,
+} from './Searchbar.styled';
 
 export class Searchbar extends React.Component {
   state = {
@@ -6,33 +14,38 @@ export class Searchbar extends React.Component {
   };
   handleNameChange = e => {
     this.setState({
-      images: e.target.value,
+      images: e.target.value.toLowerCase(),
     });
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.images);
+    this.props.onSubmit(this.state.images.trim());
     this.setState({
       images: '',
     });
   };
   render() {
     return (
-      <header>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit">
-            <span>Search</span>
-          </button>
+      <SearchBarHeader>
+        <Form onSubmit={this.handleSubmit}>
+          <Button type="submit">
+            <ButtonLabel>Search</ButtonLabel>
+          </Button>
 
-          <input
+          <Input
             type="text"
             onChange={this.handleNameChange}
+            value={this.state.value}
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
-      </header>
+        </Form>
+      </SearchBarHeader>
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
