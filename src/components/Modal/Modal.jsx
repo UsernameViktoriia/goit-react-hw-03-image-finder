@@ -11,7 +11,7 @@ export class Modal extends React.Component {
     console.log('componentWillUnmount');
     window.removeEventListener('keydown', this.handleKeyDown);
   }
-  handleKeydown = e => {
+  handleKeyDown = e => {
     console.log(e);
     if (e.code === 'Escape') {
       this.props.onClose();

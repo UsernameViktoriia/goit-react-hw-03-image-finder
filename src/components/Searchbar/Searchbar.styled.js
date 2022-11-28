@@ -32,7 +32,7 @@ export const Button = styled.button`
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://cdn.icon-icons.com/icons2/1769/PNG/512/4092559-magnifier-mobile-ui-search-ui-website-zoom_114034.png');
+  background-image: url('https://cdn.icon-icons.com/icons2/494/PNG/512/magnifier_icon-icons.com_48267.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;

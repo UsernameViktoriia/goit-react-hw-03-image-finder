@@ -37,14 +37,19 @@ export class App extends React.Component {
           if (response.ok) {
             return response.json();
           }
-          return Promise.reject(new Error('There is no picture for that name'));
         })
-        .then(images =>
+        .then(images => {
+          if (!images.total) {
+            this.setState({
+              status: 'idle',
+            });
+            return alert('There is no picture for that name');
+          }
           this.setState(pS => ({
             status: 'resolved',
             gallery: [...pS.gallery, ...images.hits],
-          }))
-        )
+          }));
+        })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
@@ -67,7 +72,9 @@ export class App extends React.Component {
           <ImageGallery images={gallery} onClick={this.onClickImage} />
         )}
         {status === 'resolved' && <Button onClick={this.onClickButton} />}
-        {status === 'rejected' && <h1>{error.message}</h1>}
+        {status === 'rejected' && (
+          <h1 style={{ textAlign: 'center' }}>{error.message}</h1>
+        )}
         {imageUrl && (
           <Modal onClose={this.onCloseModal}>
             <img src={imageUrl} alt="" />
